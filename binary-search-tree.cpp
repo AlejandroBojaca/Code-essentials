@@ -42,9 +42,9 @@ public:
         }
 
         if (val < root->val) {
-            return removeNode(root->left, val);
+            root->left = removeNode(root->left, val);
         } else if (val > root->val) {
-            return removeNode(root->right, val);
+            root->right = removeNode(root->right, val);
         } else {
             if (root->left == nullptr && root->right == nullptr) {
                 delete root;
