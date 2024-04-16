@@ -62,9 +62,9 @@ public:
         return false;
     }
 
-    vector<int> getValues() {
+    std::vector<int> getValues() {
         ListNode* curr = head->next;
-        vector<int> result;
+        std::vector<int> result;
         while (curr != nullptr) {
             result.push_back(curr->val);
             curr = curr->next;
