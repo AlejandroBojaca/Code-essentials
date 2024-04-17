@@ -3,12 +3,12 @@ struct Node {
     Node* right;
     int val;
 
-    Node(int value;) {
+    Node(int value) {
         left = nullptr;
         right = nullptr;
         val = value;
     }
-}
+};
 
 class BinaryTree {
     Node* root;
