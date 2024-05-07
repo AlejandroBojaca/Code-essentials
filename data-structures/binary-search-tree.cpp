@@ -134,18 +134,18 @@ int main() {
     bst.insert(1);
     bst.insert(4);
 
-    cout << "In-order traversal: ";
+    std::cout << "In-order traversal: ";
     bst.printInOrder(); // Output: 1 3 4 5 7
 
-    cout << "Minimum value: " << bst.findMin() << endl; // Output: 1
-    cout << "Maximum value: " << bst.findMax() << endl; // Output: 7
-    cout << "Height of the tree: " << bst.getHeight() << endl; // Output: 2
+    std::cout << "Minimum value: " << bst.findMin() << std::endl; // Output: 1
+    std::cout << "Maximum value: " << bst.findMax() << std::endl; // Output: 7
+    std::cout << "Height of the tree: " << bst.getHeight() << std::endl; // Output: 2
 
-    cout << "Searching for 4: " << bst.search(4) << endl; // Output: 1 (true)
-    cout << "Searching for 10: " << bst.search(10) << endl; // Output: 0 (false)
+    std::cout << "Searching for 4: " << bst.search(4) << std::endl; // Output: 1 (true)
+    std::cout << "Searching for 10: " << bst.search(10) << std::endl; // Output: 0 (false)
 
     bst.remove(3);
-    cout << "After removing 3, in-order traversal: ";
+    std::cout << "After removing 3, in-order traversal: ";
     bst.printInOrder(); // Output: 1 4 5 7
 
     return 0;
