@@ -77,10 +77,10 @@ class SimplexSolver:
 
     def get_solution_from_tableau(self):
         cols = []
-        for colI in range(len(self.rows[0])):
+        for col_i in range(len(self.rows[0])):
             col = [0] * len(self.rows)
-            for rowI in range(len(self.rows)):
-                col[rowI] = self.rows[rowI][colI]
+            for row_i in range(len(self.rows)):
+                col[row_i] = self.rows[row_i][col_i]
             cols.append(col)
 
         results = []
