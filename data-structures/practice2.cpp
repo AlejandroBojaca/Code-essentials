@@ -1,8 +1,9 @@
 #include <iostream>
 #include <set>
-// #include <ctime> 
-// #include <cstdlib>
 #include <random>
+#include <cstdlib>
+#include <ctime>
+
 
 struct Maxheap {
     std::vector<int> heap;
@@ -177,7 +178,6 @@ struct Graph {
         for (int i = 0; i < this->size; i++) {
             for (int j = 0; j < this->size; j++) {
                 if (adj_matrix[i][j] == 1) {
-                    std::cout << " HERE ";
                     visited.insert(i);
                     stack.push(i);
                     break;
@@ -238,41 +238,44 @@ struct Maze {
         this->maze = std::vector<std::vector<int> >(size, std::vector<int>(size, 0));
         carve_paths();
     }
-
+    
     void carve_paths() {
-        std::set<int> visited;
-        std::queue<int> queue;
-        std::vector<std::pair<int, int> > directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
-        
-        std::random_device rd;
-        std::mt19937 g(rd());
+        maze[1][0] = 1;
+        maze[1][1] = 1;
+        // std::set<std::pair<int, int> > visited;
+        // std::queue<std::pair<int, int>> queue;
 
-        shuffle(directions.begin(), directions.end(), g);
-
-        for (int i = 0; i < this->size; i++) {
-            for (int j = 0; j < this->size; j++) {
-                if (maze[i][j] == 1) {
-                    visited.insert(i);
-                    queue.push(i);
-                    break;
-                }
-            }
-            if (!visited.empty()) break;
-        }        
+        // visited.insert({1, 1});
         
-        while(!queue.empty()) {
-            int node = queue.front(); 
-            std::cout << "Visiting node " << node << std::endl;
-            queue.pop();
-            for (int i = 0; i < this->size; i++) {
-                if (maze[node][i] == 1 && visited.find(i) == visited.end()) {
-                    queue.push(i);
-                }
+        int x = 1;
+        int y = 1;
+        while (y != size - 1) {
+            int dx = 0;
+            int dy = 0;
+            std::random_device rd;
+            std::mt19937 gen(rd());
+            std::uniform_int_distribution<> dist(0, 1);
+
+            bool orientation = dist(gen);
+            bool direction = dist(gen);
+            if (orientation) {
+                dx = (direction ? 1 : -1);
+            } else {
+                dy = (direction ? 1 : -1);
             }
-            visited.insert(node);
+
+            bool in_bounds = (x + dx >= 1 && x + dx < size - 1 && y + dy >= 1 && y + dy < size - 1);
+            bool at_exit = (x == size - 2 && y + dy == size - 1);
+            // bool not_visited = visited.find({x + dx, y + dy}) == visited.end();
+
+            if (in_bounds || at_exit) {
+                x += dx;
+                y += dy;
+                // visited.insert({x, y});
+                maze[x][y] = 1;
+            }
         }
     }
-
 
     void print_maze() {
         if (this->maze.size() == 0) {
