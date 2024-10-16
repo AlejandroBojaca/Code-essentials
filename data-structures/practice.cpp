@@ -353,96 +353,6 @@ struct BinarySearchTree {
     }
 };
 
-struct Maze {
-    int size;
-    vector<vector<int> > maze;
-
-    Maze(int size) {
-        this->size = size;
-        this->maze = vector<vector<int> >(size, vector<int>(size, 0));
-        carve_paths(1, 1);
-    }
-
-    // void crave_maze() {
-    //     queue<> q;
-    //     for (int i = 0; i < this->size; i++) {
-    //         this->maze.push_back();
-    //     }
-    // }
-
-    // void carve_paths(int x, int y) {
-    //     cout<< "here";
-    //     // Define possible directions (up, down, left, right)
-    //     std::vector<std::pair<int, int> > directions;
-    //     directions.push_back(std::make_pair(0, 1));
-    //     directions.push_back(std::make_pair(1, 0));
-    //     directions.push_back(std::make_pair(0, -1));
-    //     directions.push_back(std::make_pair(-1, 0));
-    //     // Seed the random number generator with the current time
-    //     srand(time(0));
-
-    //     // Shuffle directions to randomize path carving using a basic method
-    //     for (int i = 0; i < directions.size(); ++i) {
-    //         int r = rand() % directions.size(); // Get a random index
-    //         swap(directions[i], directions[r]); // Swap the current direction with a random one
-    //     }
-
-    //     // Try each direction from the current cell
-    //     for (auto [dx, dy] : directions) {
-    //         int nx = x + dx * 2; // Move two cells to carve path
-    //         int ny = y + dy * 2;
-
-    //         // Check if within bounds and the target cell is still a wall
-    //         if (nx >= 1 && nx < size - 1 && ny >= 1 && ny < size - 1 && maze[nx][ny] == 1) {
-    //             // Break the wall between (x, y) and (nx, ny)
-    //             maze[x + dx][y + dy] = 0;
-    //             maze[nx][ny] = 0;
-
-    //             // Recur to carve paths from the new cell
-    //             carve_paths(nx, ny);
-    //         }
-    //     }
-    // }
-
-    void carve_paths(int x, int y) {
-        vector<pair<int, int> > directions = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
-
-        random_device rd;
-        mt19937 g(rd());
-
-        shuffle(directions.begin(), directions.end(), g);
-
-        for (auto [dx, dy] : directions) {
-            int nx = x + dx * 2;
-            int ny = y + dy * 2;
-
-            if (nx >= 1 && nx < size - 1 && ny >= 1 && ny < size - 1 && maze[nx][ny] == 0) {
-                maze[x + dx][y + dy] = 1;
-                maze[nx][ny] = 0;
-
-                carve_paths(nx, ny);
-            }
-        }
-    }
-
-    void print_maze() {
-        if (this->maze.size() == 0) {
-            return;
-        }
-        for (int i = 0; i < this->size; i++) {
-            for (int j = 0; j < this->size; j++) {
-                if (this->maze[i][j] == 0) {
-                    cout << "#";
-                } else {
-                    cout << ".";
-                }
-            }
-            cout << endl;
-        }
-    }
-
-};
-
 //insertion sort
 void insertion_sort(int array[], int size) {
     for (int i = 1; i < size; i++) {
@@ -625,9 +535,5 @@ int main() {
     // int size = sizeof(arr) / sizeof(arr[0]);
     // cout << "binary search: " << binary_search(arr, size, 5) << endl;
     // cout << "binary range search: " << binary_range_search(arr, size, 1) << endl;
-
-    ////Maze
-    Maze maze(10);
-    maze.print_maze();
     return 0;
 }
